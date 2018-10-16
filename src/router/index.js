@@ -17,7 +17,7 @@ export default new Router({
         component: index,
     },
     {
-    	path: '/classstyle',
+    	  path: '/classstyle',
       	component: classstyle,
       	children:[
       		{

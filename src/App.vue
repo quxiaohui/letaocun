@@ -1,24 +1,34 @@
 <template>
   <div id="app">
   <!-- 首页 -->
-    <index></index>
+    <router-view></router-view>
     <!-- 分类页 -->
-    <classstyle></classstyle>
-    <router-view/>
+    <footerbar></footerbar>
   </div>
 </template>
 
 <script>
 import index from './components/index'
-import classstyle from './components/classstyle'
+import footerbar from './components/footerbar'
 export default {
   components:{
     index,
-    classstyle
+    footerbar
   }
 }
 </script>
 
 <style>
-
+*{
+  padding: 0;
+  margin:0;
+}
+html,body{
+  width:100%;
+  height:100%;
+  background-color: #ccc
+}
+ul{
+  list-style: noen
+}
 </style>
