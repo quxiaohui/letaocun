@@ -4,12 +4,24 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css'
+Vue.use(Mint);
+
+
+import store from './store'
+
+
 Vue.config.productionTip = false
+import { InfiniteScroll } from 'mint-ui';
+	Vue.use(InfiniteScroll);
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

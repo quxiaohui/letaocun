@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '':{
+        '/lct':{
             target:'https://mobileway.lecuntao.com',
             host:'mobileway.lecuntao.com',
             changeOrigin:true
