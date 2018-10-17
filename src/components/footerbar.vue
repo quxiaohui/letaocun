@@ -22,8 +22,8 @@
         width: 100%;
         height: 50px;
         background-color: #fff;
-        list-style: none;
         position: fixed;
+        z-index: 10;
         bottom: 0;
         left:0;
         li{

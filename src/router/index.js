@@ -7,6 +7,8 @@ import food from '../components/food'
 import product from '../components/product'
 import list from '../components/list'
 import detail from '../components/detail'
+import cart from '../components/cart'
+import my from '../components/my'
 
 Vue.use(Router)
 
@@ -24,23 +26,31 @@ export default new Router({
       			path:'electric',
       			component:electric
       		},
-      		{
-      			path:'food',
-      			component:food
-      		},
-      		{
-      			path:'product',
-      			component:product
-      		}
+          {
+            path:'/',
+            redirect:'electric'
+          }
       	]
     },
     {
-    	path:"/list",
-    	component:list
+    	   path:"/list",
+    	   component:list
     },
     {
-    	path:'/detail',
-    	component:detail
+    	 path:'/detail',
+    	 component:detail
+    },
+    {
+        path:'/cart',
+        component:cart
+    },
+    {
+       path:'/my',
+        component:my
+    },
+    {
+        path:'*',
+        redirect:'/index'
     }
   ]
 })
