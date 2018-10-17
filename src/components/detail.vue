@@ -20,6 +20,7 @@
           return{
             good_id:0,
             common_id:0,
+            gc_id:0,
             prodata:{},
             who:'pro',
             detdata:{},
@@ -37,15 +38,17 @@
         mounted(){
           let index=window.location.href.indexOf('?')+1;
           let oldArr=window.location.href.slice(index).split('&');
-          let newArr=[]
-          for (var i in oldArr){
-            newArr.push(oldArr[i].split('='))
-          }
-          newArr=[...newArr[0],...newArr[1]]
-          this.good_id=parseInt(newArr[newArr.indexOf('good_id')+1])
+          // let newArr=[]
+          // for (var i in oldArr){
+          //   newArr.push(oldArr[i].split('='))
+          // }
+          // newArr=[...newArr[0],...newArr[1]]
+          this.good_id=parseInt(oldArr[2])
           console.log(this.good_id)
-          this.common_id=parseInt(newArr[newArr.indexOf('common_id')+1])
+          this.common_id=parseInt(oldArr[1])
           console.log(this.common_id)
+          this.gc_id=parseInt(oldArr[0])
+          console.log(this.gc_id)
           axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539769571143&act=mobile_goods_detail&op=getGoodsInfo',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
             console.log(res.data);
             this.prodata=res.data
@@ -54,7 +57,7 @@
             console.log(res.data);
             this.detdata=res.data
           })
-          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539772093357&act=mobile_goods_detail&op=getRecommentDetail',`gc_id=259&province_id=140&city_id=140100000000&key=`).then(res=>{
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539772093357&act=mobile_goods_detail&op=getRecommentDetail',`gc_id=${this.gc_id}&province_id=140&city_id=140100000000&key=`).then(res=>{
             console.log(res.data);
             this.recdata=res.data
           })
