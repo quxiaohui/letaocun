@@ -48,7 +48,7 @@
 	     			console.log("a");
 	     		},
 	     		ff(a,b){
-	     			location.href="/detail";
+	     			location.href=`/#/detail?${a}&${b}`;
 	     		},
 	     		loadMore() {
 	     		  this.loading = true;
