@@ -1,27 +1,40 @@
   <template>
     <nav>
       <ul>
-        <router-link to="/detail/pro" activeClass="active" tag="li">商品</router-link>
-        <router-link to="/detail/det" activeClass="active" tag="li">详情</router-link>
-        <router-link to="/detail/rec" activeClass="active" tag="li">推荐</router-link>
-        <router-view></router-view>
+        <li @click="who='pro'">商品</li>
+        <li @click="who='det'">详情</li>
+        <li @click="who='rec'">推荐</li>
       </ul>
+      <keep-alive>
+        <component :is='who' :szhpro="prodata" :szhdet="detdata" :szhrec="recdata"></component>
+      </keep-alive>
     </nav>
   </template>
   <script>
    import axios from "axios";
+   import pro from "./pro.vue";
+   import det from "./det.vue";
+   import rec from "./rec.vue";
      export default {
         data(){
           return{
             good_id:0,
             common_id:0,
-            data:{}
+            prodata:{},
+            who:'pro',
+            detdata:{},
+            recdata:{}
           }
         },
         methods:{
           
         },
-     	  mounted(){
+        components:{
+          pro,
+          det,
+          rec
+        },
+        mounted(){
           let index=window.location.href.indexOf('?')+1;
           let oldArr=window.location.href.slice(index).split('&');
           let newArr=[]
@@ -33,15 +46,24 @@
           console.log(this.good_id)
           this.common_id=parseInt(newArr[newArr.indexOf('common_id')+1])
           console.log(this.common_id)
-          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539691049120&act=mobile_goods_detail&op=getDetailData',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539769571143&act=mobile_goods_detail&op=getGoodsInfo',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
             console.log(res.data);
-            this.data=res.data
+            this.prodata=res.data
+          })
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539769571143&act=mobile_goods_detail&op=getDetailData',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
+            console.log(res.data);
+            this.detdata=res.data
+          })
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539772093357&act=mobile_goods_detail&op=getRecommentDetail',`gc_id=259&province_id=140&city_id=140100000000&key=`).then(res=>{
+            console.log(res.data);
+            this.recdata=res.data
           })
         }
      }
   </script>
   <style type="text/css" scoped lang="scss">
   nav{
+    font-size:15px;
     ul{
       display:flex;
       li{
@@ -51,6 +73,7 @@
         line-height: 40px;
       }
     }
+
   }
   .active{border-bottom:2px solid #000}
 </style>
