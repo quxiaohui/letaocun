@@ -2,7 +2,7 @@
 	<div>
 	<header>
 		<span @click="icon_ret()" class="icon-ret"></span>
-		<h2 class="address-txt">生活电器</h2>
+		<h2 class="address-txt">{{$store.state.goods_name}}</h2>
 	</header>
 	<ul class="result_ct">
 		<li class="click_style">全部</li> 
@@ -55,7 +55,7 @@
 					this.loading = true;//禁用
 					return ;
 				}
-				axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539740877131&act=goods&op=goodsList',`provinc=140&city=140100000000&keyword=&page=${this.current}&sorted=4&sequence=0&gcId= 258&workshop=`).then(res=>{
+				axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539740877131&act=goods&op=goodsList',`provinc=140&city=140100000000&keyword=&page=${this.current}&sorted=4&sequence=0&gcId=${this.$store.state.goods_id}&workshop=`).then(res=>{
 					
 					this.list = [...this.list,...res.data.datas.list] 
 	     		    this.loading = false;

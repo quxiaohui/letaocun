@@ -7,8 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state:{
 		dataList:[],
-		goods_id:2,
-		goods_name:''
+		goods_id:258,
+		goods_name:'生活电器'
 
 	},
 	mutations:{
