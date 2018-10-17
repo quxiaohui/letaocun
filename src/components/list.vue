@@ -45,7 +45,7 @@
 	     export default{
 	     	methods:{
 	     		icon_ret(){
-	     			console.log("a");
+	     			location.href="/#/classstyle";
 	     		},
 	     		ff(a,b){
 	     			location.href=`/#/detail?${a}&${b}`;

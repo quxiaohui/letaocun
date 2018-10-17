@@ -33,6 +33,7 @@
           console.log(gc_id,name)
           let info = [gc_id,name]
           this.$store.dispatch('tolist',info)
+          location.href="/#/list";
         }
       }
      }
