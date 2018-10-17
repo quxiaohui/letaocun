@@ -8,11 +8,9 @@
 </template>
 
 <script>
-import index from './components/index'
 import footerbar from './components/footerbar'
 export default {
   components:{
-    index,
     footerbar
   }
 }
