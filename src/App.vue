@@ -17,7 +17,6 @@ export default {
   }
 }
 </script>
-
 <style>
 *{
   padding: 0;
@@ -29,6 +28,6 @@ html,body{
   background-color: #ccc
 }
 ul{
-  list-style: noen
+  list-style: none
 }
 </style>
