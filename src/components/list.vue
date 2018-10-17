@@ -2,7 +2,7 @@
 	<div>
 	<header>
 		<span @click="icon_ret()" class="icon-ret"></span>
-		<h2 class="address-txt">生活电器</h2>
+		<h2 class="address-txt">{{$store.state.goods_name}}</h2>
 	</header>
 	<ul class="result_ct">
 		<li class="click_style">全部</li> 
@@ -21,7 +21,7 @@
  	<div id="scroller">
  	<ul class="cont_msg " v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
   infinite-scroll-distance="10">
-		<li v-for="data in list">
+		<li v-for="data,ai in list" @click="ff(data.goods_id,data.goods_commonid)">
 			<a>
 				<img :src="data.goods_image" style="opacity: 1;"> 
 				<span class="msg_des">{{data.goods_name}}</span>
@@ -45,7 +45,10 @@
 	     export default{
 	     	methods:{
 	     		icon_ret(){
-	     			console.log("a");
+	     			location.href="/#/classstyle";
+	     		},
+	     		ff(a,b){
+	     			location.href=`/#/detail?${a}&${b}`;
 	     		},
 	     		loadMore() {
 	     		  this.loading = true;
@@ -55,7 +58,7 @@
 					this.loading = true;//禁用
 					return ;
 				}
-				axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539740877131&act=goods&op=goodsList',`provinc=140&city=140100000000&keyword=&page=${this.current}&sorted=4&sequence=0&gcId= 258&workshop=`).then(res=>{
+				axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539740877131&act=goods&op=goodsList',`provinc=140&city=140100000000&keyword=&page=${this.current}&sorted=4&sequence=0&gcId=${this.$store.state.goods_id}&workshop=`).then(res=>{
 					
 					this.list = [...this.list,...res.data.datas.list] 
 	     		    this.loading = false;
@@ -70,7 +73,7 @@
 	     			}
 	     		},
 	     	mounted(){		
-			axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539740877131&act=goods&op=goodsList',`provinc=140&city=140100000000&keyword=&page=${this.current}&sorted=4&sequence=0&gcId=258&workshop=`).then(res=>{
+			axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539740877131&act=goods&op=goodsList',`provinc=140&city=140100000000&keyword=&page=${this.current}&sorted=4&sequence=0&gcId=${this.$store.state.goods_id}&workshop=`).then(res=>{
             
              
             this.list = res.data.datas.list;
