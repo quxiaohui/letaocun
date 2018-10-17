@@ -21,6 +21,9 @@
             console.log(res.datas)
             this.infoList = res.datas
           })
+          if(this.$store.state.dataList.length===0){
+            this.$store.dispatch('tostore')
+          }
         },
         methods:{
           handleClick(id){
@@ -29,7 +32,7 @@
               this.$emit('sontoparent',res.data.datas)
 
             })
-            // this.$store.dispatch('toStore',id)
+            
             
             this.current = id;
           }

@@ -18,7 +18,6 @@
       data(){
         return {
          
-
         }
       },
      	mounted(){
@@ -32,7 +31,9 @@
         handleClick(gc_id,name){
           console.log(gc_id,name)
           let info = [gc_id,name]
-          this.$store.dispatch('tolist',info)
+          this.$store.dispatch('tolist',info);
+          // this.$router.push('/list')
+          
         }
       }
      }
