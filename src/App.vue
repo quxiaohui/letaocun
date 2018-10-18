@@ -8,16 +8,13 @@
 </template>
 
 <script>
-import index from './components/index'
 import footerbar from './components/footerbar'
 export default {
   components:{
-    index,
     footerbar
   }
 }
 </script>
-
 <style>
 *{
   padding: 0;
@@ -29,6 +26,7 @@ html,body{
   background-color: #ccc
 }
 ul{
-  list-style: noen
+  list-style: none;
+  font-size:15px;
 }
 </style>
