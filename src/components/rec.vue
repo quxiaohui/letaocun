@@ -1,10 +1,11 @@
 <template>
 	<div>
+		<h3>为你推荐</h3>
 		<ul>
-			<li v-for="data in szhrec.datas.recommendGoods">
+			<li v-for="data in szhrec">
 				<img :src="data.goods_image" style="width:100px" />
 				<span>{{data.goods_name}}</span><br>
-				<span>{{data.goods_price}}</span>
+				<span>￥：{{data.goods_price}}</span>
 			</li>
 		</ul>
 	</div>
@@ -18,19 +19,18 @@
 			}
 		},
 		props:{
-			szhpro:Object,
-			szhdet:Object,
-			szhrec:Object
+			szhrec:Array
 		},
 	}
 </script>
 <style type="text/css" scoped lang="scss">
-	div{
-		ul{
+	div{background:#fff;
+		h3{color:red;text-align:center}
+		ul{overflow:hidden;margin-left:20px;
 			list-style:none;
-			li{width:25%;float:left;
+			li{width:32%;float:left;
 				height:200px;
-				background:#fff;
+
 			}
 		}
 	}
