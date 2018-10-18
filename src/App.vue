@@ -15,7 +15,6 @@ export default {
   }
 }
 </script>
-
 <style>
 *{
   padding: 0;

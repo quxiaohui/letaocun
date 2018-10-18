@@ -20,10 +20,10 @@
          
         }
       },
+      props:['P2S'],
      	mounted(){
        
       },
-      props:['P2S'],
       computed:{
         ...mapState['dataList']
       },
@@ -31,9 +31,8 @@
         handleClick(gc_id,name){
           console.log(gc_id,name)
           let info = [gc_id,name]
-          this.$store.dispatch('tolist',info);
-          // this.$router.push('/list')
-          
+          this.$store.dispatch('tolist',info)
+          location.href="/#/list";
         }
       }
      }

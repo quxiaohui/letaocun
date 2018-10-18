@@ -26,7 +26,6 @@
         },
         methods:{
           getinfo(data){
-            console.log('kkk',data);
             this.infoP2S = data
           }
         }

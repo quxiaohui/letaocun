@@ -16,7 +16,7 @@
   </script>
 
   <style scoped lang="scss">
-    div{  
+    div{   
       width:100%;
       height:50px;    
       div.box{
@@ -37,6 +37,9 @@
           border-radius:10%;
           text-indent: 20px;
           line-height: 80%;
+        }
+        p{
+          font-size: 16px;
         }
       }
     }
