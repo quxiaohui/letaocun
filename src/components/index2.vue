@@ -10,11 +10,11 @@
 				<li class="cate_name"  style="background:#eee"><a href="" title="">{{data.cate_info.cate_name}}</a><span class='dian'></span></li>
 				<li>
 					<ul class="di">
-						<li class="di2" v-for="litdata in data.goods_list" @click="tiaozhuan(litdata.gc_id,litdata.goods_commonid,litdata.goods_id)" style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">
-							<img :src="litdata.goods_image" alt="">
-							<p style="height:40px;width:180px;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;
+						<li class="di2" v-for="litdata in data.goods_list" @click="tiaozhuan(litdata.gc_id,litdata.goods_commonid,litdata.goods_id)" style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc; width:49%;">
+							<img :src="litdata.goods_image" alt="" style="width:100%;">
+							<p style="height:40px;width:100%;overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;
 -webkit-line-clamp:2; margin-left:10px;">{{litdata.goods_name}}</p>
-							<p style="color:red; font-size: 17px;margin-left: 10px;margin-top:10px;">{{litdata.goods_price}}元<span style='margin-left: 60px;color:black;font-size: 14px;'>已售{{litdata.goods_salenum}}件</span></p>
+							<p style="color:red; font-size: 17px;margin-left: 10px;margin-top:10px;">{{litdata.goods_price}}元<span style='margin-left: 40px;color:black;font-size: 14px;'>已售{{litdata.goods_salenum}}件</span></p>
 
 						</li>
 					</ul>

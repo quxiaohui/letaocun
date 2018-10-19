@@ -154,7 +154,7 @@
 						height: 30px;
 						position: relative;
 						text-indent: 30px;
-						width: 250px;
+						width: 50%;
 						position: absolute;
 						top: 5px;
 						// right: -20px;
@@ -186,7 +186,7 @@
 				background: white;
 				top: -20px;
 				overflow:hidden;
-				position: relative
+				position: relative;
 			}
 
 			#nav ul{
