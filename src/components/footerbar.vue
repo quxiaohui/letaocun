@@ -30,7 +30,8 @@
           width:25%;
           text-align: center;
           float: left;
-          line-height: 48px
+          line-height: 48px;
+          font-size: 18px;
         }
       }
     }

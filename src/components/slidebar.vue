@@ -1,7 +1,7 @@
   <template>
     <div>
       <ul>
-        <li v-for="data in infoList" @click="handleClick(data.gc_id)" :class="current === data.gc_id ? 'focus' : ''">{{ data.gc_name}}</li>
+        <li v-for="data,index in infoList" @click="handleClick(data.gc_id,index)" :class="current === index ? 'focus' : ''">{{ data.gc_name}}</li>
       </ul>
     </div>
   </template>
@@ -16,22 +16,23 @@
             current : 0
           }
         },
-     	  mounted(){
+        mounted(){
           fetch('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539689239867&act=mobile_cate&op=index').then(res=>res.json()).then(res=>{
-            console.log(res.datas)
+            // console.log(res.datas)
             this.infoList = res.datas
+            
+             this.handleClick(256,0)
           })
+
         },
         methods:{
-          handleClick(id){
+          handleClick(id,index){
             axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539738382581&act=mobile_cate&op=index',`gc_id=${id}`).then(res=>{
-              // console.log(res.data)
+              console.log(res.data)
               this.$emit('sontoparent',res.data.datas)
-
             })
-            // this.$store.dispatch('toStore',id)
             
-            this.current = id;
+            this.current = index;
           }
         }
      }

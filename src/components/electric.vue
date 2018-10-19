@@ -18,13 +18,12 @@
       data(){
         return {
          
-
         }
       },
+      props:['P2S'],
      	mounted(){
        
       },
-      props:['P2S'],
       computed:{
         ...mapState['dataList']
       },

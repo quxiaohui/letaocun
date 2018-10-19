@@ -1,55 +1,57 @@
-  <template>
-    <nav>
-      <ul>
-        <li @click="who='pro'" :class="who=='pro'?'active':''">商品</li>
-        <li @click="who='det'" :class="who=='det'?'active':''">详情</li>
-        <li @click="who='rec'" :class="who=='rec'?'active':''">推荐</li>
-      </ul>
-      <keep-alive>
-        <component :is='who' :szhpro="prodata" :szhdet="detdata" :szhrec="recdata" ></component>
-      </keep-alive>
-    </nav>
-  </template>
-  <script>
-   import axios from "axios";
-   import pro from "./pro.vue";
-   import det from "./det.vue";
-   import rec from "./rec.vue";
-     export default {
-        data(){
-          return{
-            good_id:0,
-            common_id:0,
-            gc_id:0,
-            prodata:"",
-            who:'pro',
-            detdata:"",
-            recdata:""
-          }
-        },
-        methods:{
-          // changestyle(evt){
-          //   var lis=this.childNodes
-          //   for(var i=0;i<lis.length;i++){
-          //     lis[i].className=''
-          //   }
-          //   evt.target.className="active"
-
-          // }
-        },
-        components:{
-          pro,
-          det,
-          rec
-        },
-        mounted(){
+<template>
+	<div>
+		<nav>
+			<ul>
+        <li @click="prev" :class="which=='3'?'active':''">返回</li>
+				<li @click="changepro" :class="which=='0'?'active':''">商品</li>
+				<li @click="changedet" :class="which=='1'?'active':''">详情</li>
+				<li @click="changerec" :class="which=='2'?'active':''">推荐</li>
+			</ul>
+		</nav>
+    <pro :szhpro="prodata" :szhdet="detdata" :szhrec="recdata"></pro>
+	</div>
+</template>
+<script>
+import axios from "axios";
+import pro from "./pro.vue"
+	export default{
+    data(){
+      return{
+         which:"0",
+         prodata:"",
+         detdata:"",
+         recdata:""
+      }
+    },
+    components:{
+      pro
+    },
+    methods:{
+      changepro(){
+        this.which='0'
+        this.$nextTick(res=>{
+          document.documentElement.scrollTop=0
+        }) 
+      },
+      changedet(){
+        this.which='1'
+        this.$nextTick(res=>{
+          document.documentElement.scrollTop=document.querySelector('#dettitle').offsetTop
+        }) 
+      },
+      changerec(){
+        this.which='2'
+        this.$nextTick(res=>{
+          document.documentElement.scrollTop=document.querySelector('#rectitle').offsetTop
+        }) 
+      },
+      prev(){
+        location.href="#/list"
+      }
+    },
+  mounted(){
           let index=window.location.href.indexOf('?')+1;
           let oldArr=window.location.href.slice(index).split('&');
-          // let newArr=[]
-          // for (var i in oldArr){
-          //   newArr.push(oldArr[i].split('='))
-          // }
-          // newArr=[...newArr[0],...newArr[1]]
           this.good_id=parseInt(oldArr[2])
           console.log(this.good_id)
           this.common_id=parseInt(oldArr[1])
@@ -69,12 +71,12 @@
             this.recdata=(res.data.datas.recommendGoods).slice(0,6)
           })
         }
-     }
-  </script>
-  <style type="text/css" scoped lang="scss">
-  nav{
-    font-size:15px;
-    ul{
+}
+</script>
+<style type="text/css" scoped lang="scss">
+ nav{width:100%;
+    font-size:15px;overflow:hidden;
+     ul{position:fixed;width:100%;top:0;left:0;z-index:2;
       background:#fff;
       border-bottom:1px solid #ccc;
       display:flex;
@@ -87,5 +89,5 @@
       }
     }
   }
-  .active{border-bottom:2px solid #000;}
+	.active{border-bottom:2px solid #000;}
 </style>
