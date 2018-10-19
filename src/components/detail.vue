@@ -43,7 +43,7 @@ import pro from "./pro.vue"
         this.$nextTick(res=>{
           document.documentElement.scrollTop=document.querySelector('#rectitle').offsetTop
         }) 
-      }
+      },
     },
   mounted(){
           let index=window.location.href.indexOf('?')+1;
