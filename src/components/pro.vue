@@ -66,12 +66,15 @@
 			}
 		},
 		mounted(){
-			window.onscroll=function(){
-				let appear=document.documentElement.scrollTop
-				let appear1=document.querySelector('#dettitle').offsetTop+200
-          		if(appear>=appear1){document.querySelector('#returnTo').style.display="block"}
-          		else{document.querySelector('#returnTo').style.display="none"}	
-			}	
+			this.$nextTick(res=>{
+				window.onscroll=function(){
+					let appear=document.documentElement.scrollTop
+					// let appear1=document.querySelector('#dettitle').offsetTop+200
+					// console.log(appear1)
+	          		if(appear>=750){document.querySelector('#returnTo').style.display="block"}
+	          		else{document.querySelector('#returnTo').style.display="none"}	
+				}
+			})	
 		},
 		props:["szhpro","szhdet","szhrec"],
 		updated(){
