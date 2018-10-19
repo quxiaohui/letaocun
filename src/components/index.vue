@@ -3,9 +3,11 @@
 
 				<div id="header" class="l">
 				    <swiper class='swiper'></swiper>
-					<i class="s iconfont icon-dibiao"></i><a href="" title="">太原市 ></a>
-					<i class="v iconfont icon-fangdajing"></i>
-					<input type="type" name="" value="搜索您需要的商品">
+				    <div id="select">
+						<i class="s iconfont icon-dibiao"></i><a href="" title="">太原市 ></a>
+						<i class="v iconfont icon-fangdajing"></i>
+						<input type="type" name="" value="搜索您需要的商品">
+					</div>
 
 					<div id="nav">
 						<ul class="nav l" >
@@ -52,6 +54,7 @@
 			 <div >
 			 	
 			 </div>
+			 <index2></index2>
 			</div>
 
 </template>
@@ -60,9 +63,11 @@
 		<script>
 		import swiper from './swiper.vue'
 		import axios from 'axios'
+		import index2 from './index2.vue'
 		export default {
 			components:{
 			  swiper,
+			  index2
 			},
 			data(){
 				return{
@@ -77,7 +82,6 @@
 					console.log(res.data.datas.platform);
 					this.navList = res.data.datas.platform.list
 				})
-
 				axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539764045449&act=index&op=index&key=','province_id=140&city_id=140100000000').then(res=>{
 					console.log(res.data.datas.le6ji);
 					this.container1List = res.data.datas.le6ji.recommend_goods
@@ -87,7 +91,14 @@
 					console.log(res.data.datas.feature);
 					this.container2List = res.data.datas.feature.recommend_goods
 				})
-			},
+				window.onscroll=function(){
+					let top=document.documentElement.scrollTop
+					if(top>0){
+						document.querySelector('#select').style.background="red"
+					}else{document.querySelector('#select').style.background="none"}
+				}
+			}
+			
 		}
 
 		</script>
@@ -99,6 +110,7 @@
 				}
 			}
 			#header{
+
 				.l{
 					float: left;
 				}
@@ -108,52 +120,61 @@
 				a{
 					text-decoration: none;
 				}
-
+				#select{height:40px;width:100%;position:fixed;left:0;top:0;z-index: 10;
+					i.s{
+						// display: inline-block;
+						padding:5px;
+						font-size: 25px;
+						color:white;
+						position: absolute;
+						top: 5px;
+						// left:5px;
+					}
+					i.v{
+						// display:inline-block;
+						position:absolute;
+						margin-left:40px;
+						top: 12px;
+						left:97px;
+						z-index: 1;
+					}
+					a{
+						font-size: 20px;
+						color: white;
+						// display:inline-block;
+						position: absolute;
+						top: 10px;
+						left:30px;
+						width:90px
+					}
+					input{
+						border-radius: 20px;
+						border: none;
+						margin-left:130px;
+						height: 30px;
+						position: relative;
+						text-indent: 30px;
+						width: 250px;
+						position: absolute;
+						top: 5px;
+						// right: -20px;
+					}
+				}
 				position:relative;
-
-			}
-
-
-
-			#header i.s{
-				display: inline-block;
-				padding:5px;
-				font-size: 20px;
-				color:white;
-				position: absolute;
-				top: 5px;
-				left:5px;
-			}
-
-			#header i.v{
-				display:inline-block;
-				position:absolute;
-				margin-left: 20px;
-				top: 12px;
-				left:97px;
-				z-index: 1;
-			}
-
-			#header a{
-				font-size: 16px;
-				color: white;
-				position: absolute;
-				top: 10px;
-				left:30px;
 
 			}
 
 			#header input{
 				border-radius: 20px;
 				border: none;
-				margin-left:10px;
+				margin-left:130px;
 				height: 30px;
 				position: relative;
 				text-indent: 30px;
-				width: 200px;
+				width: 250px;
 				position: absolute;
 				top: 5px;
-				right: 20px;
+				// right: -20px;
 			}
 
 			#header img{
@@ -163,9 +184,9 @@
 			#nav{
 				height:90px;
 				background: white;
-				position:relative;
-				top: -10px;
+				top: -20px;
 				overflow:hidden;
+				position: relative
 			}
 
 			#nav ul{
@@ -188,7 +209,7 @@
 				text-align: center;
 				width: 50px;
 				position:relative;
-				margin-left: 12px;
+				margin-left: 25px;
 			}
 
 			#nav ul li a{
@@ -197,7 +218,7 @@
 				display:block;
 				position:absolute;
 				left:-15px;
-				font-size: 14px;
+				font-size: 16px;
 				height:30px;
 				top: 18px;
 
@@ -206,11 +227,12 @@
 			.llj_title {
 			    background:url(https://m.lecuntao.com/resource/images/index/imgLe6Ji.png?lv=121fc80180) no-repeat;
 			    width: 150px;
-			    height: 20px;
+			    height:15px;
 			    background-size: contain;
 			    margin: 0 auto;
 			    display: block;
 			    margin-bottom: 5px;
+			    margin-top: -10px;
 			}
 
 			.tri_img img{
@@ -222,8 +244,9 @@
 
 			 	.swiper-container1{
 			 		background: #f0f0f0;
-			 		height:150px;
+			 		height:180px;
 			 		overflow: hidden;
+			 		background:white;
 			 	}
 
 			    .swiper-container1 ul{
@@ -233,6 +256,7 @@
 			    	position: relative;
 			    	display: flex;
 			    	box-sizing: content-box;
+			    	margin-top: 10px;
 
 			    }
 
@@ -240,10 +264,10 @@
 			    	// white-space:nowrap;
 			    	overflow: hidden;
 			    	text-overflow:ellipsis;
-			    	width:75px;
-			    	height:31px;
+			    	width:100px;
+			    	height:40px;
 			    	display:block;
-			    	font-size: 12px;
+			    	font-size: 15px;
 			    	color:black;
 			    	text-decoration: none;
 			    }
@@ -256,23 +280,24 @@
 			    .swiper-container1 ul li{
 			    	width:88px;
 			    	height:148px;
-			    	margin-left:10px;
+			    	margin-left:20px;
 			    }
 
 			    .swiper-container1 ul li img{
-			    	width:85px;
-			    	height:85px;
+			    	width:100px;
+			    	height:100px;
 			    	
 			    }
 
 			    .tsg_title{
 			    	background: url(https://m.lecuntao.com/resource/images/index/icon_teseguan.png?lv=46f429c64a) no-repeat;
 			    	width: 150px;
-			    	height: 30px;
+			    	height: 15px;
 			    	background-size: contain;
 			    	margin: 0 auto;
 			    	display: block;
 			    	margin-top: 10px;
+			    	margin-bottom: 5px;
 			    }
 
 		</style>
