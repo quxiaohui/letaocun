@@ -26,6 +26,7 @@ html,body{
   background-color: #ccc
 }
 ul{
-  list-style: none
+  list-style: none;
+  font-size:15px;
 }
 </style>

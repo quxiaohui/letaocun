@@ -21,7 +21,7 @@
  	<div id="scroller">
  	<ul class="cont_msg " v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
   infinite-scroll-distance="10">
-		<li v-for="data,ai in list" @click="ff(data.goods_id,data.goods_commonid)">
+		<li v-for="data,ai in list" @click="ff(data.goods_id,data.goods_commonid,data.gc_id)">
 			<a>
 				<img :src="data.goods_image" style="opacity: 1;"> 
 				<span class="msg_des">{{data.goods_name}}</span>
@@ -47,8 +47,8 @@
 	     		icon_ret(){
 	     			location.href="/#/classstyle";
 	     		},
-	     		ff(a,b){
-	     			location.href=`/#/detail?${a}&${b}`;
+	     		ff(a,b,c){
+	     			location.href=`/#/detail?${a}&${b}&${c}`;
 	     		},
 	     		loadMore() {
 	     		  this.loading = true;

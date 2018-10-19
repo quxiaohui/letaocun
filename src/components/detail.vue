@@ -1,56 +1,91 @@
   <template>
     <nav>
       <ul>
-        <router-link to="/detail/pro" activeClass="active" tag="li">商品</router-link>
-        <router-link to="/detail/det" activeClass="active" tag="li">详情</router-link>
-        <router-link to="/detail/rec" activeClass="active" tag="li">推荐</router-link>
-        <router-view></router-view>
+        <li @click="who='pro'" :class="who=='pro'?'active':''">商品</li>
+        <li @click="who='det'" :class="who=='det'?'active':''">详情</li>
+        <li @click="who='rec'" :class="who=='rec'?'active':''">推荐</li>
       </ul>
+      <keep-alive>
+        <component :is='who' :szhpro="prodata" :szhdet="detdata" :szhrec="recdata" ></component>
+      </keep-alive>
     </nav>
   </template>
   <script>
    import axios from "axios";
+   import pro from "./pro.vue";
+   import det from "./det.vue";
+   import rec from "./rec.vue";
      export default {
         data(){
           return{
             good_id:0,
             common_id:0,
-            data:{}
+            gc_id:0,
+            prodata:"",
+            who:'pro',
+            detdata:"",
+            recdata:""
           }
         },
         methods:{
-          
+          // changestyle(evt){
+          //   var lis=this.childNodes
+          //   for(var i=0;i<lis.length;i++){
+          //     lis[i].className=''
+          //   }
+          //   evt.target.className="active"
+
+          // }
         },
-     	  mounted(){
+        components:{
+          pro,
+          det,
+          rec
+        },
+        mounted(){
           let index=window.location.href.indexOf('?')+1;
           let oldArr=window.location.href.slice(index).split('&');
-          let newArr=[]
-          for (var i in oldArr){
-            newArr.push(oldArr[i].split('='))
-          }
-          newArr=[...newArr[0],...newArr[1]]
-          this.good_id=parseInt(newArr[newArr.indexOf('good_id')+1])
+          // let newArr=[]
+          // for (var i in oldArr){
+          //   newArr.push(oldArr[i].split('='))
+          // }
+          // newArr=[...newArr[0],...newArr[1]]
+          this.good_id=parseInt(oldArr[2])
           console.log(this.good_id)
-          this.common_id=parseInt(newArr[newArr.indexOf('common_id')+1])
+          this.common_id=parseInt(oldArr[1])
           console.log(this.common_id)
-          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539691049120&act=mobile_goods_detail&op=getDetailData',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
+          this.gc_id=parseInt(oldArr[0])
+          console.log(this.gc_id)
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539769571143&act=mobile_goods_detail&op=getGoodsInfo',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
             console.log(res.data);
-            this.data=res.data
+            this.prodata=res.data
+          })
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539769571143&act=mobile_goods_detail&op=getDetailData',`common_id=${this.common_id}&goods_id=${this.good_id}&key=`).then(res=>{
+            console.log(res.data);
+            this.detdata=res.data
+          })
+          axios.post('/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1539772093357&act=mobile_goods_detail&op=getRecommentDetail',`gc_id=${this.gc_id}&province_id=140&city_id=140100000000&key=`).then(res=>{
+            console.log(res.data);
+            this.recdata=(res.data.datas.recommendGoods).slice(0,6)
           })
         }
      }
   </script>
   <style type="text/css" scoped lang="scss">
   nav{
+    font-size:15px;
     ul{
+      background:#fff;
+      border-bottom:1px solid #ccc;
       display:flex;
       li{
         flex:1;
         text-align: center;
         height: 40px;
         line-height: 40px;
+        padding-bottom:-2px
       }
     }
   }
-  .active{border-bottom:2px solid #000}
+  .active{border-bottom:2px solid #000;}
 </style>
