@@ -2,6 +2,7 @@
 	<div>
 		<nav>
 			<ul>
+        <li @click="prev" :class="which=='3'?'active':''">返回</li>
 				<li @click="changepro" :class="which=='0'?'active':''">商品</li>
 				<li @click="changedet" :class="which=='1'?'active':''">详情</li>
 				<li @click="changerec" :class="which=='2'?'active':''">推荐</li>
@@ -44,6 +45,9 @@ import pro from "./pro.vue"
           document.documentElement.scrollTop=document.querySelector('#rectitle').offsetTop
         }) 
       },
+      prev(){
+        location.href="#/list"
+      }
     },
   mounted(){
           let index=window.location.href.indexOf('?')+1;
